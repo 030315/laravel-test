@@ -1,0 +1,44 @@
+version: "3"
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - "8089:80"
+    depends_on:
+      - app
+    volumes:
+      - ./app:/app
+  app:
+    build: ./app
+    depends_on:
+      - db
+      - mssql
+      - redis
+    volumes:
+      - ./app:/app
+    ports:
+      - "8088:8000"
+      - "8087:8080"
+      - "6001:6001"
+    # command: bash -c "cd api && npm run watch"
+  db:
+    build: ./mysql
+    ports:
+      - "33306:3306"
+    restart: always
+    environment:
+        MYSQL_DATABASE: sample_db
+        MYSQL_ROOT_PASSWORD: password
+  mssql:
+    build: ./mssql
+    ports:
+      - "1433:1433"
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: str0ngPassw0rd
+      TZ: Asia/Tokyo
+  redis:
+      image: redis:latest
+      ports:
+        - "6379:6379"
+      command: redis-server --appendonly yes --requirepass password

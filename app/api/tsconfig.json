@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+      "outDir": "./built/",
+      "sourceMap": true,
+      "strict": true,
+      "noImplicitReturns": true,
+      "noImplicitAny": true,
+      "module": "es2015",
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "moduleResolution": "node",
+      "target": "es5",
+      "lib": [
+        "es2017",
+        "dom"
+      ],
+      "types": [
+        "vuetify"
+      ]
+    },
+    "include": [
+      "resources/assets/ts/**/*",
+      "resources/assets/ts/**/*.ts",
+      "resources/assets/ts/**/*.tsx",
+      "resources/assets/ts/**/*.vue",
+    ]
+  }
